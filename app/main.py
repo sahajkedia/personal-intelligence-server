@@ -121,4 +121,4 @@ def search_notes(q: str, db: Session = Depends(get_db)):
     ).all()
     return {"query": q, "results": notes}
 
-app.mount("/", StaticFiles(directory="app/static"),html=True, name="static")
+app.mount("/", StaticFiles(directory="app/static",html=True), name="static")
