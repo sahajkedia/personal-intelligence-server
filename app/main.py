@@ -4,6 +4,7 @@ from typing import Generator
 
 import requests
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from sqlalchemy import or_, select, text
 from sqlalchemy.orm import Session
@@ -119,3 +120,5 @@ def search_notes(q: str, db: Session = Depends(get_db)):
         .limit(100)
     ).all()
     return {"query": q, "results": notes}
+
+app.mount("/", StaticFiles(directory="app/static"),html=True, name="static")
