@@ -3,7 +3,7 @@ name: Deploy to Mi Laptop
 on:
   push:
     branches:
-      - main
+      - master
 
 concurrency:
   group: mi-laptop-deploy
@@ -12,8 +12,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
-      - name: Deploy latest main
+      - name: Deploy latest code
         run: |
-          chmod +x deploy.sh
-          ./deploy.sh
+          cd /home/kdboss/personal-intelligence-server
+          git fetch origin master
+          git reset --hard origin/master
+          docker compose up -d --build --remove-orphans
+          docker image prune -f
