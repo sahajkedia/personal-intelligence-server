@@ -1,0 +1,19 @@
+name: Deploy to Mi Laptop
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: mi-laptop-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Deploy latest main
+        run: |
+          chmod +x deploy.sh
+          ./deploy.sh
