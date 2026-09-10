@@ -48,7 +48,7 @@ class NoteCreate(BaseModel):
 
 @app.get("/")
 def root():
-    return {"message": "Personal Intelligence Server is running on my server"}
+    return {"message": "Personal Intelligence Server is deployed automatically"}
 
 
 @app.get("/health")
